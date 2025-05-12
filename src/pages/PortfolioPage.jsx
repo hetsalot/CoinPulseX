@@ -77,9 +77,9 @@ const PortfolioPage = () => {
   );
 
   return (
-    <div className="pt-24 px-4 sm:px-10 text-white bg-gray-950 min-h-screen py-8">
+    <div className="min-h-screen bg-gray-950 text-white pt-24 sm:pt-24 md:pt-24 px-6 md:px-12 pb-8">
       <div className="flex flex-col items-start mb-6">
-        <h1 className="text-2xl sm:text-4xl font-semibold text-center  text-gray-100">
+        <h1 className="text-3xl md:text-4xl font-semibold text-center text-gray-100">
           Portfolio
         </h1>
 
