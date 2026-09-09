@@ -32,10 +32,7 @@ import {
 
   const isDevUser = (userId) => {
     if (!userId) return false;
-    if (typeof userId === "string" && userId.startsWith("local-dev")) return true;
-    // In local dev environment, always enable local data storage so trades and balances work seamlessly
-    if (isLocalEnvironment()) return true;
-    return false;
+    return typeof userId === "string" && userId.startsWith("local-dev");
   };
 
   // Local storage data accessors
@@ -310,6 +307,9 @@ import {
       
       // Also sync to local storage for offline resilience
       saveLocalPortfolioData(userId, { balance: parseFloat(currentBalance.toFixed(2)), holdings });
+      addLocalTradeRecord(userId, { ...tradeData, id: newTradeRef.id });
+      window.dispatchEvent(new CustomEvent("coinpulsex_trades_updated", { detail: { userId } }));
+      window.dispatchEvent(new CustomEvent("coinpulsex_balance_updated", { detail: { balance: currentBalance, userId } }));
 
       return {
         success: true,

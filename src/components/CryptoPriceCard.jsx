@@ -11,20 +11,26 @@ import {
 } from "lucide-react";
 
 export const COINS = {
-  BTC: { symbol: "BTCUSDT", name: "Bitcoin", color: "text-amber-400", bg: "bg-amber-500/10" },
-  ETH: { symbol: "ETHUSDT", name: "Ethereum", color: "text-indigo-400", bg: "bg-indigo-500/10" },
-  SOL: { symbol: "SOLUSDT", name: "Solana", color: "text-purple-400", bg: "bg-purple-500/10" },
-  ADA: { symbol: "ADAUSDT", name: "Cardano", color: "text-blue-400", bg: "bg-blue-500/10" },
-  XRP: { symbol: "XRPUSDT", name: "XRP", color: "text-cyan-400", bg: "bg-cyan-500/10" },
-  LTC: { symbol: "LTCUSDT", name: "Litecoin", color: "text-slate-300", bg: "bg-slate-500/10" },
-  BNB: { symbol: "BNBUSDT", name: "BNB", color: "text-yellow-400", bg: "bg-yellow-500/10" },
-  DOGE: { symbol: "DOGEUSDT", name: "Dogecoin", color: "text-amber-300", bg: "bg-amber-500/10" },
-  DOT: { symbol: "DOTUSDT", name: "Polkadot", color: "text-pink-400", bg: "bg-pink-500/10" },
-  AVAX: { symbol: "AVAXUSDT", name: "Avalanche", color: "text-red-400", bg: "bg-red-500/10" },
-  UNI: { symbol: "UNIUSDT", name: "Uniswap", color: "text-pink-500", bg: "bg-pink-500/10" },
-  LINK: { symbol: "LINKUSDT", name: "Chainlink", color: "text-blue-500", bg: "bg-blue-500/10" },
-  BCH: { symbol: "BCHUSDT", name: "Bitcoin Cash", color: "text-emerald-400", bg: "bg-emerald-500/10" },
-  ALGO: { symbol: "ALGOUSDT", name: "Algorand", color: "text-teal-400", bg: "bg-teal-500/10" },
+  BTC: { symbol: "BTCUSDT", name: "Bitcoin" },
+  ETH: { symbol: "ETHUSDT", name: "Ethereum" },
+  SOL: { symbol: "SOLUSDT", name: "Solana" },
+  BNB: { symbol: "BNBUSDT", name: "Binance Coin" },
+  XRP: { symbol: "XRPUSDT", name: "XRP (Ripple)" },
+  ADA: { symbol: "ADAUSDT", name: "Cardano" },
+  DOGE: { symbol: "DOGEUSDT", name: "Dogecoin" },
+  AVAX: { symbol: "AVAXUSDT", name: "Avalanche" },
+  LINK: { symbol: "LINKUSDT", name: "Chainlink" },
+  SUI: { symbol: "SUIUSDT", name: "Sui" },
+  LTC: { symbol: "LTCUSDT", name: "Litecoin" },
+  NEAR: { symbol: "NEARUSDT", name: "NEAR Protocol" },
+  DOT: { symbol: "DOTUSDT", name: "Polkadot" },
+  UNI: { symbol: "UNIUSDT", name: "Uniswap" },
+  BCH: { symbol: "BCHUSDT", name: "Bitcoin Cash" },
+  APT: { symbol: "APTUSDT", name: "Aptos" },
+  ICP: { symbol: "ICPUSDT", name: "Internet Computer" },
+  SHIB: { symbol: "SHIBUSDT", name: "Shiba Inu" },
+  ATOM: { symbol: "ATOMUSDT", name: "Cosmos" },
+  ALGO: { symbol: "ALGOUSDT", name: "Algorand" },
 };
 
 const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) => {
@@ -87,14 +93,14 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
   const isPositive = data ? parseFloat(data.priceChange) >= 0 : true;
 
   return (
-    <div className="glass-card rounded-2xl p-5 shadow-2xl relative overflow-hidden transition-all duration-300">
+    <div className="glass-card rounded-2xl p-6 shadow-2xl relative overflow-hidden transition-all duration-300">
       {/* Background radial accent */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/[0.04] rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
 
       {/* Top Selector Bar */}
-      <div className="flex items-center justify-between gap-3 mb-5">
-        <div className="flex items-center space-x-2.5">
-          <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+      <div className="flex items-center justify-between gap-3 mb-6">
+        <div className="flex items-center space-x-3">
+          <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
             <Radio className={`w-4 h-4 ${isUpdating ? "text-cyan-300 animate-spin" : "text-cyan-400"}`} />
           </div>
           <div>
@@ -113,7 +119,7 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
           <select
             value={selected}
             onChange={(e) => handleCoinSelect(e.target.value)}
-            className="appearance-none bg-slate-900/90 text-white font-semibold text-xs sm:text-sm pl-3.5 pr-8 py-2 rounded-xl border border-white/10 hover:border-cyan-500/40 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 cursor-pointer shadow-inner"
+            className="appearance-none bg-slate-900/80 text-white font-semibold text-xs sm:text-sm pl-4 pr-9 py-2.5 rounded-xl border border-white/[0.08] hover:border-cyan-500/40 focus:outline-none focus:ring-1 focus:ring-cyan-500/40 cursor-pointer shadow-inner"
           >
             {Object.keys(COINS).map((coin) => (
               <option key={coin} value={coin} className="bg-slate-950 text-white">
@@ -126,14 +132,14 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
       </div>
 
       {data ? (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {/* Main Price & Delta Banner */}
-          <div className="p-4 rounded-xl bg-slate-950/60 border border-white/[0.06] flex items-center justify-between">
+          <div className="p-5 rounded-xl bg-slate-950/50 border border-white/[0.06] flex items-center justify-between">
             <div>
               <span className="text-xs font-mono uppercase text-slate-400 tracking-wider block">
                 {selected} / USDT Spot
               </span>
-              <div className="flex items-baseline space-x-2 mt-0.5">
+              <div className="flex items-baseline space-x-2 mt-1">
                 <span className="text-2xl sm:text-3xl font-black tracking-tight text-white num-font">
                   ${data.price}
                 </span>
@@ -141,10 +147,10 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
             </div>
 
             <div
-              className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-xl text-xs font-bold font-mono border ${
+              className={`flex items-center space-x-1 px-3 py-2 rounded-xl text-xs font-bold font-mono border ${
                 isPositive
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 glow-emerald"
-                  : "bg-rose-500/10 text-rose-400 border-rose-500/30 glow-rose"
+                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25 glow-emerald"
+                  : "bg-rose-500/10 text-rose-400 border-rose-500/25 glow-rose"
               }`}
             >
               {isPositive ? (
@@ -160,10 +166,10 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
           </div>
 
           {/* 4-Stat Metric Grid */}
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-3">
             {/* 24h High */}
-            <div className="p-3 rounded-xl bg-slate-900/50 border border-white/[0.05]">
-              <div className="flex items-center space-x-1 text-[11px] text-slate-400 mb-1">
+            <div className="p-4 rounded-xl bg-slate-900/40 border border-white/[0.05] hover:border-white/[0.1] transition-colors">
+              <div className="flex items-center space-x-1.5 text-[11px] text-slate-400 mb-1.5">
                 <ArrowUpRight className="w-3 h-3 text-emerald-400" />
                 <span>24h High</span>
               </div>
@@ -173,8 +179,8 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
             </div>
 
             {/* 24h Low */}
-            <div className="p-3 rounded-xl bg-slate-900/50 border border-white/[0.05]">
-              <div className="flex items-center space-x-1 text-[11px] text-slate-400 mb-1">
+            <div className="p-4 rounded-xl bg-slate-900/40 border border-white/[0.05] hover:border-white/[0.1] transition-colors">
+              <div className="flex items-center space-x-1.5 text-[11px] text-slate-400 mb-1.5">
                 <ArrowDownRight className="w-3 h-3 text-rose-400" />
                 <span>24h Low</span>
               </div>
@@ -184,8 +190,8 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
             </div>
 
             {/* 24h Volume */}
-            <div className="p-3 rounded-xl bg-slate-900/50 border border-white/[0.05]">
-              <div className="flex items-center space-x-1 text-[11px] text-slate-400 mb-1">
+            <div className="p-4 rounded-xl bg-slate-900/40 border border-white/[0.05] hover:border-white/[0.1] transition-colors">
+              <div className="flex items-center space-x-1.5 text-[11px] text-slate-400 mb-1.5">
                 <BarChart3 className="w-3 h-3 text-cyan-400" />
                 <span>24h Volume</span>
               </div>
@@ -195,8 +201,8 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
             </div>
 
             {/* 24h Turnover / Market Cap */}
-            <div className="p-3 rounded-xl bg-slate-900/50 border border-white/[0.05]">
-              <div className="flex items-center space-x-1 text-[11px] text-slate-400 mb-1">
+            <div className="p-4 rounded-xl bg-slate-900/40 border border-white/[0.05] hover:border-white/[0.1] transition-colors">
+              <div className="flex items-center space-x-1.5 text-[11px] text-slate-400 mb-1.5">
                 <Coins className="w-3 h-3 text-amber-400" />
                 <span>24h Turnover</span>
               </div>
@@ -207,7 +213,7 @@ const CryptoPriceCard = ({ selectedCoin = "BTC", onCoinChange, onPriceUpdate }) 
           </div>
         </div>
       ) : (
-        <div className="p-8 text-center space-y-3">
+        <div className="p-10 text-center space-y-3">
           <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-slate-400 font-mono">Syncing market feed...</p>
         </div>

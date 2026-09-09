@@ -7,10 +7,10 @@ const PrivateRoutes = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-950 text-white">
-        <div className="flex items-center space-x-3">
-          <div className="w-6 h-6 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-lg font-semibold">Verifying session...</p>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="glass-card p-8 rounded-2xl flex items-center space-x-4 shadow-2xl">
+          <div className="w-7 h-7 border-[2.5px] border-cyan-400 border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm font-mono text-slate-300">Verifying session...</p>
         </div>
       </div>
     );

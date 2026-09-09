@@ -11,7 +11,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
-import { Activity, Clock, Maximize2, RefreshCw, TrendingUp } from "lucide-react";
+import { Activity } from "lucide-react";
 
 // Register Chart.js components
 ChartJS.register(
@@ -141,8 +141,8 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
 
   const strokeColor = isTrendingUp ? "#10b981" : "#f43f5e";
   const fillColor = isTrendingUp
-    ? "rgba(16, 185, 129, 0.12)"
-    : "rgba(244, 63, 94, 0.12)";
+    ? "rgba(16, 185, 129, 0.08)"
+    : "rgba(244, 63, 94, 0.08)";
 
   const chartData = {
     labels: timeLabels,
@@ -153,12 +153,12 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
         borderColor: strokeColor,
         backgroundColor: fillColor,
         fill: true,
-        borderWidth: 2.5,
+        borderWidth: 2,
         tension: 0.35,
-        pointRadius: chartMode === "live" ? 3 : 1.5,
+        pointRadius: chartMode === "live" ? 3 : 1,
         pointHoverRadius: 6,
         pointBackgroundColor: strokeColor,
-        pointBorderColor: "#080a10",
+        pointBorderColor: "var(--bg-primary)",
         pointBorderWidth: 2,
       },
     ],
@@ -175,14 +175,15 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
       legend: { display: false },
       title: { display: false },
       tooltip: {
-        backgroundColor: "rgba(11, 15, 25, 0.95)",
+        backgroundColor: "rgba(8, 12, 22, 0.95)",
         titleColor: "#94a3b8",
         bodyColor: "#38bdf8",
         bodyFont: { family: "JetBrains Mono", size: 13, weight: "bold" },
-        borderColor: "rgba(6, 182, 212, 0.3)",
+        borderColor: "rgba(34, 211, 238, 0.25)",
         borderWidth: 1,
-        padding: 12,
+        padding: 14,
         boxPadding: 6,
+        cornerRadius: 10,
         usePointStyle: true,
         displayColors: false,
         callbacks: {
@@ -196,24 +197,26 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
     scales: {
       x: {
         grid: {
-          color: "rgba(255, 255, 255, 0.04)",
+          color: "rgba(255, 255, 255, 0.03)",
           drawBorder: false,
         },
         ticks: {
-          color: "#64748b",
-          font: { family: "JetBrains Mono", size: 11 },
-          maxTicksLimit: 8,
+          color: "#475569",
+          font: { family: "JetBrains Mono", size: 10 },
+          maxTicksLimit: 7,
+          padding: 8,
         },
       },
       y: {
         position: "right",
         grid: {
-          color: "rgba(255, 255, 255, 0.04)",
+          color: "rgba(255, 255, 255, 0.03)",
           drawBorder: false,
         },
         ticks: {
-          color: "#64748b",
-          font: { family: "JetBrains Mono", size: 11 },
+          color: "#475569",
+          font: { family: "JetBrains Mono", size: 10 },
+          padding: 12,
           callback: (value) => `$${value < 1 ? value.toFixed(4) : value.toLocaleString()}`,
         },
       },
@@ -227,12 +230,12 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
     : "--";
 
   return (
-    <div className="glass-card rounded-2xl p-5 md:p-6 shadow-2xl relative overflow-hidden transition-all duration-300">
+    <div className="glass-card-elevated rounded-2xl p-6 md:p-7 shadow-2xl relative overflow-hidden">
       {/* Top Header & Price Overview */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/[0.06] mb-5">
-        <div className="space-y-1">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/[0.06] mb-6">
+        <div className="space-y-1.5">
           <div className="flex items-center space-x-2.5">
-            <span className="text-xs font-mono uppercase font-bold text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
+            <span className="text-xs font-mono uppercase font-bold text-cyan-400 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
               {coinSymbol}
             </span>
             <div className="flex items-center space-x-1.5">
@@ -246,12 +249,12 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
             </div>
           </div>
 
-          <div className="flex items-baseline space-x-3 mt-1">
-            <span className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white num-font">
+          <div className="flex items-baseline space-x-3 mt-2">
+            <span className="text-3xl sm:text-4xl lg:text-[2.75rem] font-black tracking-tight text-white num-font">
               ${formattedPrice}
             </span>
             {highPrice && lowPrice && (
-              <div className="hidden sm:flex items-center space-x-3 text-xs font-mono text-slate-400">
+              <div className="hidden sm:flex items-center space-x-4 text-xs font-mono text-slate-400">
                 <span>H: <strong className="text-emerald-400 font-normal">${lowPrice < 1 ? highPrice.toFixed(4) : highPrice.toLocaleString()}</strong></span>
                 <span>L: <strong className="text-rose-400 font-normal">${lowPrice < 1 ? lowPrice.toFixed(4) : lowPrice.toLocaleString()}</strong></span>
               </div>
@@ -260,17 +263,17 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
         </div>
 
         {/* Timeframe Switcher Pills */}
-        <div className="flex items-center space-x-1 bg-slate-950/80 p-1 rounded-xl border border-white/[0.08] self-start lg:self-center overflow-x-auto max-w-full">
+        <div className="flex items-center space-x-1 bg-slate-950/70 p-1.5 rounded-xl border border-white/[0.06] self-start lg:self-center overflow-x-auto max-w-full">
           {TIMEFRAMES.map((tf) => {
             const active = chartMode === tf.id;
             return (
               <button
                 key={tf.id}
                 onClick={() => setChartMode(tf.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3.5 py-2 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
                   active
                     ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
+                    : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                 }`}
               >
                 {tf.label}
@@ -282,23 +285,23 @@ const CryptoChart = ({ coinSymbol = "BTCUSDT" }) => {
 
       {/* Chart Canvas Area */}
       {error ? (
-        <div className="h-[360px] flex items-center justify-center p-6 text-center text-rose-400 text-sm">
+        <div className="h-[380px] flex items-center justify-center p-6 text-center text-rose-400 text-sm">
           {error}
         </div>
       ) : isLoading && priceData.length === 0 ? (
-        <div className="h-[360px] flex flex-col items-center justify-center space-y-3">
+        <div className="h-[380px] flex flex-col items-center justify-center space-y-3">
           <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
           <p className="text-xs text-slate-400 font-mono">Loading market stream...</p>
         </div>
       ) : (
-        <div className="h-[360px] sm:h-[400px] w-full relative">
+        <div className="h-[380px] sm:h-[420px] w-full relative">
           <Line ref={chartRef} data={chartData} options={chartOptions} />
         </div>
       )}
 
       {/* Footer Info Bar */}
-      <div className="mt-4 pt-3 border-t border-white/[0.05] flex items-center justify-between text-[11px] font-mono text-slate-500">
-        <span className="flex items-center space-x-1">
+      <div className="mt-5 pt-4 border-t border-white/[0.05] flex items-center justify-between text-[11px] font-mono text-slate-500">
+        <span className="flex items-center space-x-1.5">
           <Activity className="w-3.5 h-3.5 text-cyan-400" />
           <span>Binance Public Market Stream</span>
         </span>

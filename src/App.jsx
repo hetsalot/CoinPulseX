@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import ProfilePage from "./pages/ProfilePage";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
@@ -14,16 +15,17 @@ const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <Navbar />
-        <div className="min-h-screen bg-[#080a10] text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
+        <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
           {/* Subtle ambient lighting gradients */}
           <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            <div className="absolute -top-40 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px]" />
-            <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[140px]" />
-            <div className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-violet-600/5 rounded-full blur-[160px]" />
+            <div className="absolute -top-40 left-1/4 w-[700px] h-[700px] bg-cyan-500/[0.04] rounded-full blur-[160px]" />
+            <div className="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-indigo-600/[0.04] rounded-full blur-[160px]" />
+            <div className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-violet-600/[0.03] rounded-full blur-[180px]" />
           </div>
 
-          <div className="relative z-10">
+          <Navbar />
+
+          <main className="relative z-10 flex-1">
             <Routes>
               <Route path="/" element={<ProfilePage />} />
               <Route path="/profile" element={<ProfilePage />} />
@@ -54,7 +56,9 @@ const App = () => {
               />
               <Route path="/*" element={<NotFound />} />
             </Routes>
-          </div>
+          </main>
+
+          <Footer />
         </div>
       </AuthProvider>
     </Router>
